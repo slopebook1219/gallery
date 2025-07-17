@@ -19,7 +19,7 @@ export default function Home() {
   }, [mvImages.length]);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-red-500 z-0">
+    <div className="fixed inset-0 flex items-center justify-centerz-0">
       <div className="fixed top-7 right-5 z-10">
         <button className="flex h-10 w-10 flex-col items-center justify-center space-y-2">
           <span className="block h-[2px] w-8 rounded-full bg-gray-500"></span>

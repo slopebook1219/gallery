@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FilmImages, type FilmImageType } from "./_constant";
 import FilmModal from "./_item/filmModal";
 
@@ -8,6 +8,32 @@ export default function Film() {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null
   );
+  const [allImagesLoaded, setAllImagesLoaded] = useState(false);
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      try {
+        await Promise.all(
+          FilmImages.map(
+            (image) =>
+              new Promise<void>((resolve, reject) => {
+                const img = new window.Image();
+                img.src = image.src;
+                img.onload = () => resolve();
+                img.onerror = () =>
+                  reject(new Error(`Failed to load image at ${image.src}`));
+              })
+          )
+        );
+        setAllImagesLoaded(true);
+      } catch (error) {
+        console.error("画像読み込み中にエラーが発生しました", error);
+        setAllImagesLoaded(true);
+      }
+    };
+
+    preloadImages();
+  }, []);
 
   const handleImageClick = (index: number) => {
     setSelectedImageIndex(index);
@@ -41,11 +67,17 @@ export default function Film() {
   return (
     <>
       <div className="relative min-h-screen md:p-8 mt-20 md:mt-15">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 max-w-5xl md:max-w-6xl mx-auto p-4">
+        <div
+          className={`
+            grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 max-w-5xl md:max-w-6xl mx-auto p-4
+            transition-opacity duration-500
+            ${allImagesLoaded ? "opacity-100" : "opacity-0"}
+          `}
+        >
           {FilmImages.map((image, index) => (
             <div
               key={image.id}
-              className="group relative w-full  aspect-square overflow-hidden cursor-pointer"
+              className="group relative w-full aspect-square overflow-hidden cursor-pointer"
               onClick={() => handleImageClick(index)}
             >
               <Image
@@ -73,7 +105,6 @@ export default function Film() {
         </div>
       </div>
 
-      {/* モーダル部分 */}
       {selectedImage && (
         <FilmModal
           selectedImage={selectedImage}

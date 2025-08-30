@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { FilmImageType } from "../../_constant";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import { Navigation } from "swiper/modules";
+import type { Swiper as SwiperCore } from "swiper";
 
 interface FilmModalProps {
   selectedImage: FilmImageType;
@@ -28,7 +29,6 @@ function PreloadImages({
           alt={img.alt}
           width={900}
           height={900}
-          objectFit="contain"
           priority
           style={{ display: "none" }}
         />
@@ -48,16 +48,15 @@ export default function FilmModal({
 
   const [imagesToPreload, setImagesToPreload] = useState<FilmImageType[]>([]);
 
-  useEffect(() => {
-    const nextIndex = (initialIndex + 1) % allImages.length;
-    const prevIndex = (initialIndex - 1 + allImages.length) % allImages.length;
+  const handleSlideChange = (swiper: SwiperCore) => {
+    const nextIndex = (swiper.realIndex + 1) % allImages.length;
 
     const preloads = [];
-    if (allImages[nextIndex]) preloads.push(allImages[nextIndex]);
-    if (allImages[prevIndex]) preloads.push(allImages[prevIndex]);
-
+    if (allImages[nextIndex]) {
+      preloads.push(allImages[nextIndex]);
+    }
     setImagesToPreload(preloads);
-  }, [selectedImage, allImages, initialIndex]);
+  };
 
   return (
     <div className="fixed inset-0 bg-opacity-90 z-50 flex flex-col justify-center items-center p-4 bg-white overflow-y-hidden">
@@ -96,6 +95,7 @@ export default function FilmModal({
           }}
           modules={[Navigation]}
           className="w-full h-full"
+          onSlideChange={handleSlideChange}
         >
           {allImages.map((image) => (
             <SwiperSlide key={image.id}>

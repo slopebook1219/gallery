@@ -1,3 +1,4 @@
+// FilmGallery.tsx
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -45,7 +46,10 @@ export default function FilmGallery() {
         setModalImageLoaded(true);
       };
       img.onerror = () => {
-        console.error("モーダル内の画像の読み込みに失敗しました");
+        console.error(
+          "モーダル内の画像の読み込みに失敗しました",
+          selectedImage.src
+        );
         setModalImageLoaded(true);
       };
     }
@@ -102,6 +106,7 @@ export default function FilmGallery() {
           ))}
         </div>
       </div>
+      {/* modalImageLoadedがtrueの時のみモーダルを表示 */}
       {selectedImage && modalImageLoaded && (
         <FilmModal
           selectedImage={selectedImage}
@@ -109,12 +114,7 @@ export default function FilmGallery() {
           allImages={FilmImages}
         />
       )}
-      {selectedImage && !modalImageLoaded && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 text-white">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-white"></div>
-          <p className="ml-4">Loading Image...</p>
-        </div>
-      )}
+      {/* ローディングスピナーの表示部分を完全に削除 */}
     </>
   );
 }

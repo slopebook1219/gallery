@@ -4,8 +4,8 @@
 import { useState } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import HamburgerIcon from "./component/HamburgerIcon"; // コンポーネントのパスを確認
-import Link from "next/link"; // Linkコンポーネントをインポート
+import HamburgerIcon from "./component/_item/HamburgerIcon";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

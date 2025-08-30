@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { FilmImages } from "../../_constant";
-import { FilmImageType } from "../../_constant";
 import FilmModal from "../../_item/filmModal";
 
 export default function FilmGallery() {
@@ -10,6 +9,7 @@ export default function FilmGallery() {
     null
   );
   const [allImagesLoaded, setAllImagesLoaded] = useState(false);
+  const [modalImageLoaded, setModalImageLoaded] = useState(false);
 
   useEffect(() => {
     const preloadImages = async () => {
@@ -34,6 +34,22 @@ export default function FilmGallery() {
     };
     preloadImages();
   }, []);
+
+  useEffect(() => {
+    if (selectedImageIndex !== null) {
+      setModalImageLoaded(false);
+      const selectedImage = FilmImages[selectedImageIndex];
+      const img = new window.Image();
+      img.src = selectedImage.src;
+      img.onload = () => {
+        setModalImageLoaded(true);
+      };
+      img.onerror = () => {
+        console.error("モーダル内の画像の読み込みに失敗しました");
+        setModalImageLoaded(true);
+      };
+    }
+  }, [selectedImageIndex]);
 
   const handleImageClick = (index: number) => {
     setSelectedImageIndex(index);
@@ -86,12 +102,18 @@ export default function FilmGallery() {
           ))}
         </div>
       </div>
-      {selectedImage && (
+      {selectedImage && modalImageLoaded && (
         <FilmModal
           selectedImage={selectedImage}
           onClose={handleCloseModal}
           allImages={FilmImages}
         />
+      )}
+      {selectedImage && !modalImageLoaded && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 text-white">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-white"></div>
+          <p className="ml-4">Loading Image...</p>
+        </div>
       )}
     </>
   );

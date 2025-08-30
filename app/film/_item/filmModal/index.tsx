@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FilmImageType } from "../../_constant";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -47,6 +47,15 @@ export default function FilmModal({
   );
 
   const [imagesToPreload, setImagesToPreload] = useState<FilmImageType[]>([]);
+
+  useEffect(() => {
+    const preloads = [];
+    const nextIndex = (initialIndex + 1) % allImages.length;
+    if (allImages[nextIndex]) {
+      preloads.push(allImages[nextIndex]);
+    }
+    setImagesToPreload(preloads);
+  }, [selectedImage, initialIndex, allImages]);
 
   const handleSlideChange = (swiper: SwiperCore) => {
     const nextIndex = (swiper.realIndex + 1) % allImages.length;

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react"; // useEffectを再度インポート
+import { useState } from "react";
 import Image from "next/image";
 import { FilmImageType } from "../../_constant";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -48,46 +48,14 @@ export default function FilmModal({
 
   const [imagesToPreload, setImagesToPreload] = useState<FilmImageType[]>([]);
 
-  // モーダルが開かれたとき、または選択画像が変更されたときに、現在の画像とその次の画像をプリロード
-  useEffect(() => {
-    const preloads: FilmImageType[] = [];
-
-    // 1. 現在選択されている画像をプリロード対象に追加
-    if (selectedImage) {
-      preloads.push(selectedImage);
-    }
-
-    // 2. 次のスライドの画像もプリロード対象に追加 (以前のonSlideChangeと同じロジック)
-    // ただし、モーダルが開いた時点ではまだSwiperが初期化されていない可能性があるので、
-    // initialIndexを使って次の画像を計算します。
-    if (initialIndex !== -1) {
-      const nextIndex = (initialIndex + 1) % allImages.length;
-      if (allImages[nextIndex]) {
-        preloads.push(allImages[nextIndex]);
-      }
-    }
-
-    // 重複を避けるためにSetを使う（厳密にはidでフィルタリングする方が良いが、今回はシンプルに）
-    const uniquePreloads = Array.from(
-      new Set(preloads.map((img) => img.id))
-    ).map((id) => preloads.find((img) => img.id === id)!);
-
-    setImagesToPreload(uniquePreloads);
-  }, [selectedImage, initialIndex, allImages]); // selectedImageが変更されたときに発火
-
-  // スライドが変更されたときに次の画像をプリロード (これは以前のロジックを維持)
   const handleSlideChange = (swiper: SwiperCore) => {
     const nextIndex = (swiper.realIndex + 1) % allImages.length;
-    const currentPreloads = [...imagesToPreload]; // 既存のプリロードリストを取得
 
-    // 次の画像をプリロードリストに追加（重複しないように）
-    if (
-      allImages[nextIndex] &&
-      !currentPreloads.some((img) => img.id === allImages[nextIndex].id)
-    ) {
-      currentPreloads.push(allImages[nextIndex]);
+    const preloads = [];
+    if (allImages[nextIndex]) {
+      preloads.push(allImages[nextIndex]);
     }
-    setImagesToPreload(currentPreloads);
+    setImagesToPreload(preloads);
   };
 
   return (

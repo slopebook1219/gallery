@@ -43,20 +43,6 @@ export default function FilmGallery() {
     setSelectedImageIndex(null);
   };
 
-  const handleNext = () => {
-    setSelectedImageIndex((prevIndex) => {
-      if (prevIndex === null) return 0;
-      return prevIndex === FilmImages.length - 1 ? 0 : prevIndex + 1;
-    });
-  };
-
-  const handlePrev = () => {
-    setSelectedImageIndex((prevIndex) => {
-      if (prevIndex === null) return 0;
-      return prevIndex === 0 ? FilmImages.length - 1 : prevIndex - 1;
-    });
-  };
-
   const selectedImage =
     selectedImageIndex !== null ? FilmImages[selectedImageIndex] : null;
 

@@ -16,7 +16,7 @@ export default function MvSlider({ images }: MvSliderProps) {
     }
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 6000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [images.length]);

@@ -1,4 +1,3 @@
-// FilmGallery.tsx
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -106,7 +105,6 @@ export default function FilmGallery() {
           ))}
         </div>
       </div>
-      {/* modalImageLoadedがtrueの時のみモーダルを表示 */}
       {selectedImage && modalImageLoaded && (
         <FilmModal
           selectedImage={selectedImage}
@@ -114,7 +112,6 @@ export default function FilmGallery() {
           allImages={FilmImages}
         />
       )}
-      {/* ローディングスピナーの表示部分を完全に削除 */}
     </>
   );
 }

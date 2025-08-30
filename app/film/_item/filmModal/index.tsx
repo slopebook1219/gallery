@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react"; // useEffectをインポート
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FilmImageType } from "../../_constant";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -47,11 +47,9 @@ export default function FilmModal({
   );
 
   const [imagesToPreload, setImagesToPreload] = useState<FilmImageType[]>([]);
-  const [isVisible, setIsVisible] = useState(false); // 新しいステート
+  const [isVisible, setIsVisible] = useState(false);
 
-  // コンポーネントがマウントされたら、アニメーションを開始
   useEffect(() => {
-    // 短い遅延を設けることで、初期レンダリング後にトランジションが適用される
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 50);
@@ -79,12 +77,11 @@ export default function FilmModal({
     setImagesToPreload(preloads);
   };
 
-  // 閉じる時のアニメーションも考慮
   const handleCloseClick = () => {
     setIsVisible(false);
     setTimeout(() => {
       onClose();
-    }, 300); // CSSのトランジション時間と合わせる
+    }, 300);
   };
 
   return (

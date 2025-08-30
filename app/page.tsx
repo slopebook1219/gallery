@@ -2,7 +2,6 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import getMvImages from "./utils/getMvImages";
-
 export default function Home() {
   const mvImages = getMvImages();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -19,30 +18,27 @@ export default function Home() {
   }, [mvImages.length]);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-centerz-0">
-      <div className="fixed top-7 right-5 z-10">
-        <button className="flex h-10 w-10 flex-col items-center justify-center space-y-2">
-          <span className="block h-[2px] w-8 rounded-full bg-gray-500"></span>
-          <span className="block h-[2px] w-8 rounded-full bg-gray-500"></span>
-          <span className="block h-[2px] w-8 rounded-full bg-gray-500"></span>
-        </button>
+    <>
+      <div className="relative w-full h-screen overflow-hidden">
+        <div className="absolute inset-0 flex items-center justify-center z-10">
+          <div className="relative w-[85%] h-[85vh] max-w-screen-xl mx-auto overflow-hidden">
+            {mvImages.map((imagePath, index) => (
+              <Image
+                key={index}
+                src={imagePath}
+                alt={`スライド画像 ${index + 1}`}
+                fill
+                priority={index === 0}
+                className={`
+                  object-contain
+                  transition-opacity duration-2000 ease-in-out
+                  ${index === currentImageIndex ? "opacity-100" : "opacity-0"}
+                `}
+              />
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="relative w-[85%] h-[85vh] max-w-screen-xl mx-auto overflow-hidden">
-        {mvImages.map((imagePath, index) => (
-          <Image
-            key={index}
-            src={imagePath}
-            alt={`スライド画像 ${index + 1}`}
-            fill
-            priority={index === 0}
-            className={`
-              object-contain
-              transition-opacity duration-2000 ease-in-out
-              ${index === currentImageIndex ? "opacity-100" : "opacity-0"}
-            `}
-          />
-        ))}
-      </div>
-    </div>
+    </>
   );
 }

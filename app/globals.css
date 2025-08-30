@@ -24,12 +24,17 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-/* Webkitベースのブラウザ（Chrome, Safariなど）のスクロールバーを非表示にする */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
 
-/* Firefoxのスクロールバーを非表示にする */
-.scrollbar-hide {
-  scrollbar-width: none;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --swiper-navigation-color: #737373;
+}
+@media (max-width: 767px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none !important;
+  }
 }

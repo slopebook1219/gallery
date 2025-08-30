@@ -26,13 +26,8 @@ export default function FilmModal({
         (img) => img.id === selectedImage.id
       );
       if (selectedIndex !== -1) {
-        const imageContainer = scrollRef.current.children[
-          selectedIndex
-        ] as HTMLElement;
-        if (imageContainer) {
-          scrollRef.current.scrollLeft =
-            selectedIndex * imageContainer.offsetWidth;
-        }
+        scrollRef.current.scrollLeft =
+          selectedIndex * scrollRef.current.offsetWidth;
       }
     }
   }, [selectedImage, allImages]);
@@ -83,15 +78,14 @@ export default function FilmModal({
         </button>
         <div
           ref={scrollRef}
-          className="flex overflow-x-scroll snap-x snap-mandatory scrollbar-hide"
+          className="flex w-full overflow-x-scroll snap-x snap-mandatory scrollbar-hide"
         >
           {allImages.map((image) => (
             <div
               key={image.id}
-              className="flex-shrink-0 snap-center flex justify-center items-center"
-              style={{ flexBasis: "min(calc(100vw - 2rem), 900px)" }}
+              className="flex-shrink-0 snap-center flex justify-center items-center w-full md:w-[900px] h-full"
             >
-              <div className="relative border border-gray-200">
+              <div className="relative">
                 <Image
                   src={image.src}
                   alt={image.alt}

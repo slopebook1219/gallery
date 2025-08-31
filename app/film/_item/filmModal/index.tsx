@@ -54,25 +54,34 @@ export default function FilmModal({
       setIsVisible(true);
     }, 50);
 
-    // クリーンアップ関数でタイマーをクリア
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     const preloads = [];
     const nextIndex = (initialIndex + 1) % allImages.length;
+    const prevIndex = (initialIndex - 1 + allImages.length) % allImages.length;
+
     if (allImages[nextIndex]) {
       preloads.push(allImages[nextIndex]);
+    }
+    if (allImages[prevIndex]) {
+      preloads.push(allImages[prevIndex]);
     }
     setImagesToPreload(preloads);
   }, [selectedImage, initialIndex, allImages]);
 
   const handleSlideChange = (swiper: SwiperCore) => {
     const nextIndex = (swiper.realIndex + 1) % allImages.length;
+    const prevIndex =
+      (swiper.realIndex - 1 + allImages.length) % allImages.length;
 
     const preloads = [];
     if (allImages[nextIndex]) {
       preloads.push(allImages[nextIndex]);
+    }
+    if (allImages[prevIndex]) {
+      preloads.push(allImages[prevIndex]);
     }
     setImagesToPreload(preloads);
   };
@@ -94,7 +103,7 @@ export default function FilmModal({
 
       <button
         className="absolute top-4 right-4 text-gray-500 z-50"
-        onClick={handleCloseClick} // 修正
+        onClick={handleCloseClick}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

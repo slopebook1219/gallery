@@ -4,9 +4,5 @@ import getMvImages from "./utils/getMvImages";
 export default function Home() {
   const mvImages = getMvImages();
 
-  return (
-    <>
-      <MvSlider images={mvImages} />
-    </>
-  );
+  return <MvSlider images={mvImages} />;
 }

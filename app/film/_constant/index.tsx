@@ -1,4 +1,3 @@
-// フィルムギャラリー用のイメージリスト
 export type FilmImageType = {
   id: number;
   src: string;

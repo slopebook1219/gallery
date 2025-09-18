@@ -1,10 +1,14 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { FilmImages } from "../../_constant";
 import FilmModal from "../../_item/filmModal";
+import { FilmImageType } from "../../_constant";
 
-export default function FilmGallery() {
+interface FilmGalleryProps {
+  images: FilmImageType[];
+}
+
+export default function FilmGallery({ images }: FilmGalleryProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null
   );
@@ -18,13 +22,13 @@ export default function FilmGallery() {
   };
 
   const selectedImage =
-    selectedImageIndex !== null ? FilmImages[selectedImageIndex] : null;
+    selectedImageIndex !== null ? images[selectedImageIndex] : null;
 
   return (
     <>
       <div className="relative min-h-screen md:p-8 mt-20 md:mt-15">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 max-w-5xl md:max-w-6xl mx-auto p-4">
-          {FilmImages.map((image, index) => (
+          {images.map((image, index) => (
             <div
               key={image.id}
               className="group relative w-full aspect-square overflow-hidden cursor-pointer"
@@ -58,7 +62,7 @@ export default function FilmGallery() {
         <FilmModal
           selectedImage={selectedImage}
           onClose={handleCloseModal}
-          allImages={FilmImages}
+          allImages={images}
         />
       )}
     </>

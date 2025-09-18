@@ -15,28 +15,6 @@ interface FilmModalProps {
   allImages: FilmImageType[];
 }
 
-function PreloadImages({
-  imagesToPreload,
-}: {
-  imagesToPreload: FilmImageType[];
-}) {
-  return (
-    <>
-      {imagesToPreload.map((img) => (
-        <Image
-          key={img.id}
-          src={img.src}
-          alt={img.alt}
-          width={900}
-          height={900}
-          priority
-          style={{ display: "none" }}
-        />
-      ))}
-    </>
-  );
-}
-
 export default function FilmModal({
   selectedImage,
   onClose,
@@ -46,7 +24,6 @@ export default function FilmModal({
     (img) => img.id === selectedImage.id
   );
 
-  const [imagesToPreload, setImagesToPreload] = useState<FilmImageType[]>([]);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -56,35 +33,6 @@ export default function FilmModal({
 
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    const preloads = [];
-    const nextIndex = (initialIndex + 1) % allImages.length;
-    const prevIndex = (initialIndex - 1 + allImages.length) % allImages.length;
-
-    if (allImages[nextIndex]) {
-      preloads.push(allImages[nextIndex]);
-    }
-    if (allImages[prevIndex]) {
-      preloads.push(allImages[prevIndex]);
-    }
-    setImagesToPreload(preloads);
-  }, [selectedImage, initialIndex, allImages]);
-
-  const handleSlideChange = (swiper: SwiperCore) => {
-    const nextIndex = (swiper.realIndex + 1) % allImages.length;
-    const prevIndex =
-      (swiper.realIndex - 1 + allImages.length) % allImages.length;
-
-    const preloads = [];
-    if (allImages[nextIndex]) {
-      preloads.push(allImages[nextIndex]);
-    }
-    if (allImages[prevIndex]) {
-      preloads.push(allImages[prevIndex]);
-    }
-    setImagesToPreload(preloads);
-  };
 
   const handleCloseClick = () => {
     setIsVisible(false);
@@ -99,8 +47,6 @@ export default function FilmModal({
                  transition-all duration-300 ease-in-out
                  ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
     >
-      <PreloadImages imagesToPreload={imagesToPreload} />
-
       <button
         className="absolute top-4 right-4 text-gray-500 z-50"
         onClick={handleCloseClick}
@@ -134,9 +80,8 @@ export default function FilmModal({
           }}
           modules={[Navigation]}
           className="w-full h-full"
-          onSlideChange={handleSlideChange}
         >
-          {allImages.map((image) => (
+          {allImages.map((image, index) => (
             <SwiperSlide key={image.id}>
               <div className="flex-shrink-0 flex justify-center items-center w-full h-full">
                 <div className="relative">
@@ -147,6 +92,7 @@ export default function FilmModal({
                     height={900}
                     objectFit="contain"
                     className="max-w-full max-h-[80vh] w-auto h-auto"
+                    priority={index === initialIndex}
                   />
                 </div>
               </div>

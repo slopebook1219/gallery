@@ -1,14 +1,14 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import FilmModal from "../../_item/filmModal";
-import { FilmImageType } from "../../_constant";
+import Modal from "../../_item/Modal";
+import { ImageType } from "../../_constant";
 
-interface FilmGalleryProps {
-  images: FilmImageType[];
+interface GalleryProps {
+  images: ImageType[];
 }
 
-export default function FilmGallery({ images }: FilmGalleryProps) {
+export default function FilmGallery({ images }: GalleryProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null
   );
@@ -59,7 +59,7 @@ export default function FilmGallery({ images }: FilmGalleryProps) {
         </div>
       </div>
       {selectedImage && (
-        <FilmModal
+        <Modal
           selectedImage={selectedImage}
           onClose={handleCloseModal}
           allImages={images}

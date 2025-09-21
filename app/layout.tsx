@@ -60,8 +60,8 @@ export default function RootLayout({
                 </Link>
               </li>
               <li className="py-3 md:px-4 cursor-pointer text-2xl">
-                <Link href="/film" onClick={handleMenuToggle}>
-                  film
+                <Link href="/photos" onClick={handleMenuToggle}>
+                  photos
                 </Link>
               </li>
             </ul>

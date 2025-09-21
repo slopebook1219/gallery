@@ -1,4 +1,4 @@
-export type FilmImageType = {
+export type ImageType = {
   id: number;
   src: string;
   alt: string;
@@ -9,42 +9,42 @@ export type FilmImageType = {
 export const FilmImages = [
   {
     id: 1,
-    src: "/film/gateballers.webp",
+    src: "/photos/gateballers.webp",
     alt: "Dreapでパシャリ",
     camera: "NATURA CLASSICA",
     film: "kodak Color Plus",
   },
   {
     id: 2,
-    src: "/film/shinkansen.webp",
+    src: "/photos/shinkansen.webp",
     alt: "新幹線の窓から田んぼ",
     camera: "NATURA CLASSICA",
     film: "kodak Color Plus",
   },
   {
     id: 3,
-    src: "/film/tenjou.webp",
+    src: "/photos/tenjou.webp",
     alt: "100年記念館天井",
     camera: "NATURA CLASSICA",
     film: "kodak Color Plus",
   },
   {
     id: 4,
-    src: "/film/miyajima.webp",
+    src: "/photos/miyajima.webp",
     alt: "宮島BEAMS",
     camera: "NATURA CLASSICA",
     film: "kodak Color Plus",
   },
   {
     id: 5,
-    src: "/film/boatrace.webp",
+    src: "/photos/boatrace.webp",
     alt: "宮島ボートレース場",
     camera: "NATURA CLASSICA",
     film: "kodak Color Plus",
   },
   {
     id: 6,
-    src: "/film/cue.webp",
+    src: "/photos/cue.webp",
     alt: "Cueトートバック",
     camera: "NATURA CLASSICA",
     film: "kodak Color Plus",

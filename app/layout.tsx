@@ -64,6 +64,11 @@ export default function RootLayout({
                   photos
                 </Link>
               </li>
+              <li className="py-3 md:px-4 cursor-pointer text-2xl">
+                <Link href="/surface" onClick={handleMenuToggle}>
+                  surface
+                </Link>
+              </li>
             </ul>
           </nav>
         </div>

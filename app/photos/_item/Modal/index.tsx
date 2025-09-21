@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { FilmImageType } from "../../_constant";
+import { ImageType } from "../../_constant";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -9,17 +9,17 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import type { Swiper as SwiperCore } from "swiper";
 
-interface FilmModalProps {
-  selectedImage: FilmImageType;
+interface ModalProps {
+  selectedImage: ImageType;
   onClose: () => void;
-  allImages: FilmImageType[];
+  allImages: ImageType[];
 }
 
-export default function FilmModal({
+export default function Modal({
   selectedImage,
   onClose,
   allImages,
-}: FilmModalProps) {
+}: ModalProps) {
   const initialIndex = allImages.findIndex(
     (img) => img.id === selectedImage.id
   );

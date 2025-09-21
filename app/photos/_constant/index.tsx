@@ -6,7 +6,7 @@ export type ImageType = {
   film?: string;
   comment?: string;
 };
-export const FilmImages = [
+export const Images = [
   {
     id: 1,
     src: "/photos/gateballers.webp",

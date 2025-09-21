@@ -8,7 +8,7 @@ interface GalleryProps {
   images: ImageType[];
 }
 
-export default function FilmGallery({ images }: GalleryProps) {
+export default function Gallery({ images }: GalleryProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null
   );

@@ -64,11 +64,11 @@ export default function RootLayout({
                   photos
                 </Link>
               </li>
-              {/* <li className="py-3 md:px-4 cursor-pointer text-2xl">
-                <Link href="/surface" onClick={handleMenuToggle}>
-                  surface
+              <li className="py-3 md:px-4 cursor-pointer text-2xl">
+                <Link href="/nature" onClick={handleMenuToggle}>
+                  nature
                 </Link>
-              </li> */}
+              </li>
             </ul>
           </nav>
         </div>

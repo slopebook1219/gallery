@@ -1,4 +1,4 @@
-import Gallery from "./_component/Gallery";
+import Gallery from "../component/Gallery";
 import getGalleryImages from "./utils/getImages";
 
 const galleryImages = getGalleryImages();

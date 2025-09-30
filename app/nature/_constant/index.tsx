@@ -41,14 +41,14 @@ export const Images = [
     src: "/nature/7E9A2A3F-36FA-44B4-9EC3-80032254EBE1.JPG",
     alt: "#",
     camera: "NATURA CLASSICA",
-    film: "Kodak Ultra Max400",
+    film: "Ektar100",
   },
     {
     id: 6,
     src: "/nature/IMG_0719.JPG",
     alt: "#",
     camera: "NATURA CLASSICA",
-    film: "Kodak Ultra Max400",
+    film: "Ektar100",
   },
     {
     id: 7,

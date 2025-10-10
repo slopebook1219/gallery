@@ -33,17 +33,17 @@ export default function HeaderWithMenu(){
       >
         <nav className="pt-20 ">
           <ul>
-            <li className="py-3 md:px-4 cursor-pointer text-2xl">
+            <li className="py-3 md:px-4 cursor-pointer text-2xl md:text-3xl">
               <Link href="/" onClick={handleMenuToggle}>
                 home
               </Link>
             </li>
-            <li className="py-3 md:px-4 cursor-pointer text-2xl">
+            <li className="py-3 md:px-4 cursor-pointer text-2xl md:text-3xl">
               <Link href="/photos" onClick={handleMenuToggle}>
                 photos
               </Link>
             </li>
-            <li className="py-3 md:px-4 cursor-pointer text-2xl">
+            <li className="py-3 md:px-4 cursor-pointer text-2xl md:text-3xl">
               <Link href="/nature" onClick={handleMenuToggle}>
                 nature
               </Link>

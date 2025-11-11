@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
 
 interface MvSliderProps {
   images: string[];
@@ -20,9 +20,15 @@ export default function MvSlider({ images }: MvSliderProps) {
 
     return () => clearInterval(interval);
   }, [images.length]);
+  const handelNextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div
+      className="relative w-full h-screen overflow-hidden cursor-pointer"
+      onClick={handelNextImage}
+    >
       <div className="absolute inset-0 flex items-center justify-center z-10">
         <div className="relative w-[85%] h-[85vh] max-w-screen-xl mx-auto overflow-hidden">
           {images.map((imagePath, index) => (
@@ -35,7 +41,7 @@ export default function MvSlider({ images }: MvSliderProps) {
               className={`
                 object-contain
                 transition-opacity duration-2000 ease-in-out
-                ${index === currentImageIndex ? "opacity-100" : "opacity-0"}
+                ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}
               `}
             />
           ))}

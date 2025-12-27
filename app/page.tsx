@@ -1,7 +1,4 @@
-import { get } from 'http';
 import MvSlider from './component/_item/MvSliders/ index';
-import { getMvImages } from './utils';
-import { fetchBlogPosts } from './utils';
 import { fetchSlideImages } from './utils';
 export const metadata = {
   title: '坂本大幹',

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react'; // 1. useEffectを追加
+import React, { useState, useEffect } from 'react';
 
 type Props = {
   slides: {

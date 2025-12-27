@@ -28,7 +28,7 @@ export default function MvSlider({ slides }: Props) {
     const timer = setInterval(nextSlide, 5000);
 
     return () => clearInterval(timer);
-  }, [slides.length]);
+  }, [currentIndex, slides.length]);
 
   return (
     <div className="relative w-full h-screen cursor-pointer" onClick={handleClick}>

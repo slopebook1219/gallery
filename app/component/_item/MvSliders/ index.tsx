@@ -1,52 +1,55 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'; // 1. useEffectを追加
 
-interface MvSliderProps {
-  images: string[];
-}
+type Props = {
+  slides: {
+    image: {
+      url: string;
+      height: number;
+      width: number;
+    };
+  }[];
+};
 
-export default function MvSlider({ images }: MvSliderProps) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+export default function MvSlider({ slides }: Props) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  function nextSlide() {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+  }
+
+  function handleClick() {
+    nextSlide();
+  }
 
   useEffect(() => {
-    if (images.length <= 1) {
-      return;
-    }
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000);
+    const timer = setInterval(nextSlide, 5000);
 
-    return () => clearInterval(interval);
-  }, [images.length]);
-  const handelNextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
+    return () => clearInterval(timer);
+  }, [slides.length]);
 
   return (
-    <div
-      className="relative w-full h-screen overflow-hidden cursor-pointer"
-      onClick={handelNextImage}
-    >
-      <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div className="relative w-[85%] h-[85vh] max-w-screen-xl mx-auto overflow-hidden">
-          {images.map((imagePath, index) => (
-            <Image
-              key={index}
-              src={imagePath}
-              alt={`スライド画像 ${index + 1}`}
-              fill
-              priority={index === 0}
-              className={`
-                object-contain
-                transition-opacity duration-2000 ease-in-out
-                ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}
-              `}
-            />
-          ))}
+    <div className="relative w-full h-screen cursor-pointer" onClick={handleClick}>
+      {slides.map((item, index) => (
+        <div
+          key={index}
+          className={`
+            absolute inset-0 w-[85%] h-[80%] mx-auto my-auto
+            transition-opacity duration-2000 ease-in-out
+            ${index === currentIndex ? 'opacity-100' : 'opacity-0'}
+          `}
+        >
+          <Image
+            src={item.image.url}
+            alt="MV"
+            fill
+            className="object-contain"
+            priority={index === 0}
+          />
         </div>
-      </div>
+      ))}
     </div>
   );
 }

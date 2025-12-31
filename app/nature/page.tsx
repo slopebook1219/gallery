@@ -1,8 +1,7 @@
-import Gallery from "../component/Gallery";
-import getImages from "./utils/getImages";
+import Gallery from '@/app/component/Gallery';
+import { fetchNatureImages } from '@/app/nature/utils';
 
-const galleryImages = getImages();
-
-export default function NatureIndex() {
-  return <Gallery images={galleryImages} />;
+export default async function NatureIndex() {
+  const natures = await fetchNatureImages();
+  return <Gallery images={natures} />;
 }

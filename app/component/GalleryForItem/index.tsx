@@ -8,30 +8,39 @@ type Props = {
 
 export default function GalleryForItem({ items }: Props) {
   return (
-    <>
-      <div className="relative min-h-screen">
-        <div className="md:max-w-6xl mx-auto my-auto p-5 pt-23">
-          {items.map((item, index) => {
-            return (
-              <>
-                <div
-                  key={index}
-                  className="group relative w-full aspect-[5/4] overflow-hidden cursor-pointer"
-                >
-                  <Image
-                    src={item.image.url}
-                    alt={item.image.url || 'Gallery Image'}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </div>
-                <p className="font-serif text-gray-500">{item.title}</p>
-                <p className="font-serif text-gray-500 text-[14px]">{item.body}</p>
-              </>
-            );
-          })}
-        </div>
+    <div className="min-h-screen">
+      <div className="md:max-w-6xl mx-auto p-5 md:pt-30 pt-23">
+        {items.map((item, index) => (
+          <div key={index}>
+            <div
+              className="
+                mx-auto
+                w-full
+                md:w-2/4
+              "
+            >
+              <Image
+                src={item.image.url}
+                alt={item.title || 'Gallery Image'}
+                width={1200}
+                height={960}
+                className="w-full h-auto"
+              />
+            </div>
+            <div
+              className="
+                mx-auto
+                w-full
+                md:w-2/4
+                mt-2
+              "
+            >
+              <p className="font-serif text-gray-500 md:text-[25px]">{item.title}</p>
+              <p className="font-serif text-gray-500 md:text-[18px] text-[14px]">{item.body}</p>
+            </div>
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 }

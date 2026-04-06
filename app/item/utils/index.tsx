@@ -3,7 +3,7 @@ export async function fetchItemContents() {
   const data = await client.get({
     endpoint: 'item',
     queries: {
-      fields: ['image', 'title', 'body'],
+      fields: ['image', 'title', 'body', 'comment'],
     },
   });
   return data.contents;

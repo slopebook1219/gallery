@@ -35,8 +35,11 @@ export default function GalleryForItem({ items }: Props) {
                 mt-2
               "
             >
-              <p className="font-serif text-gray-500 md:text-[25px]">{item.title}</p>
-              <p className="font-serif text-gray-500 md:text-[18px] text-[14px]">{item.body}</p>
+              <p className="font-serif text-gray-800 md:text-[25px]">{item.title}</p>
+              <p className="font-serif text-gray-800 md:text-[18px] text-[14px]">{item.body}</p>
+              <p className="font-serif text-gray-500 md:text-[18px] text-[14px] pb-8">
+                {item.comment}
+              </p>
             </div>
           </div>
         ))}

@@ -12,4 +12,5 @@ export type ItemType = {
   image: ImageUrl;
   title: string;
   body?: string;
+  comment?: string;
 };

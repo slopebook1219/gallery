@@ -7,8 +7,7 @@ export const metadata = {
     default: '坂本大幹 | ポートフォリオ',
     template: '%s | 坂本大幹',
   },
-  description:
-    '坂本大幹の公式ポートフォリオサイトです。モノクロに変化するインタラクティブなギャラリーを展示しています。',
+  description: '坂本大幹のポートフォリオサイト。日々を彩る風景、欠かせないアイテムを掲載。',
   verification: {
     google: 'KvWNGfmzKsf_3XpITugU_7fl0Yd-ENN8NTcQDL5rTIg',
   },
